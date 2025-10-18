@@ -12,47 +12,53 @@ ASMFLAGS     = -f elf32
 LINKER       = linker/linker.ld
 LINK_FLAGS   = ld -m elf_i386 -T
 
-BIN			 = bin/
+BIN          = bin/
+OBJ          = obj/
 SRC          = src
-X86			 = src/x86
-STRING		 = src/lib/string
-TERMINAL	 = src/graphic/terminal
+X86          = $(SRC)/x86
+STRING       = $(SRC)/lib/string
+TERMINAL     = $(SRC)/graphic/terminal
 
 C_SOURCES    = $(SRC)/kernel.c \
-${STRING}/ft_strlen.c \
-${TERMINAL}/print.c
+			   $(STRING)/ft_strlen.c \
+			   $(TERMINAL)/print.c
 
 ASM_SOURCES  = $(X86)/boot.s
 
-C_OBJECTS    = $(patsubst %.c,%.o,$(C_SOURCES))
-ASM_OBJECTS  = $(patsubst %.s,%.o,$(ASM_SOURCES))
+C_OBJECTS    = $(C_SOURCES:$(SRC)/%.c=$(OBJ)/%.o)
+ASM_OBJECTS  = $(ASM_SOURCES:$(SRC)/%.s=$(OBJ)/%.o)
 
 GRUB         = grub-mkrescue
 QEMU         = qemu-system-i386
 
-all: ${NAME}
+all: $(BIN) $(NAME)
 
-%.o: %.c
-	${CC} ${CFLAGS} -c $< -o $@
+$(BIN):
+	mkdir -p $@
 
-%.o: %.s
-	${ASM} ${ASMFLAGS} $< -o $@
+$(OBJ)/%.o: $(SRC)/%.c
+	mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-${KERNEL}: ${C_OBJECTS} ${ASM_OBJECTS}
-	${LINK_FLAGS} ${LINKER} -o ${KERNEL} ${C_OBJECTS} ${ASM_OBJECTS}
-	mv ${KERNEL} ${BOOT_FILE}
+$(OBJ)/%.o: $(SRC)/%.s
+	mkdir -p $(dir $@)
+	$(ASM) $(ASMFLAGS) $< -o $@
 
-${NAME}: ${KERNEL}
-	${GRUB} -o ${NAME} ${KERNEL_FILE}
-	mv ${NAME} ${BIN}
+$(KERNEL): $(C_OBJECTS) $(ASM_OBJECTS)
+	$(LINK_FLAGS) $(LINKER) -o $@ $(C_OBJECTS) $(ASM_OBJECTS)
+	mv $@ $(BOOT_FILE)
 
-run: ${NAME}
-	${QEMU} ${BIN}/${NAME}
+$(NAME): $(KERNEL)
+	$(GRUB) -o $@ $(KERNEL_FILE)
+	mv $@ $(BIN)
+
+run: $(NAME)
+	$(QEMU) $(BIN)/$(NAME)
 
 clean:
-	rm -f ${C_OBJECTS} ${ASM_OBJECTS}
+	rm -rf $(OBJ)
 
 fclean: clean
-	rm -f ${KERNEL}
+	rm -f $(BOOT_FILE)/$(KERNEL) $(BIN)/$(NAME)
 
 .PHONY: all run clean fclean

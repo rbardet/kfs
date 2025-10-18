@@ -1,9 +1,10 @@
 #ifndef PRINT_H
 #define PRINT_H
 
-#define VRAM (char *)0xb8000
+#define VRAM 0xb8000
 
 #include "../../lib/string/string.h"
+#include "../../type.h"
 
 #define BLACK 0x00
 #define BLUE 0x01
@@ -22,6 +23,10 @@
 #define YELLOW 0x0E
 #define WHITE 0x0F
 
+#define HEIGHT 800
+#define WIDTH 800
+
 void print_terminal(const char *text, unsigned int color);
+void clear_terminal();
 
 #endif

@@ -1,6 +1,7 @@
 #include "graphic/terminal/print.h"
 
 void kmain() {
-	print_terminal("42", GREEN);
+	clear_terminal();
+	print_terminal("42", LIGHT_MAGENTA);
 	return ;
 }

@@ -1,7 +1,7 @@
 #ifndef STRING_H
 #define STRING_H
 
-#define size_t long unsigned int
+#include "../../type.h"
 
 size_t ft_strlen(const char *s);
 

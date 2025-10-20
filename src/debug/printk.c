@@ -70,11 +70,13 @@ void print_terminal(const char text) {
 }
 
 static int putstrk(const char *str) {
+	int len = 0;
 	while (*str) {
 		print_terminal(*str);
+		len++;
 		str++;
 	}
-	return (strlen(str));
+	return (len);
 }
 
 static int printk_format(va_list list, const char format) {
@@ -98,7 +100,7 @@ int printk(const char *format, ...) {
 	va_start(arg, format);
 	while (*format) {
 		if (*format == '%' && *(format + 1)) {
-			len += printk_format(arg, *format);
+			len += printk_format(arg, *(format + 1));
 			format += 2;
 		} else {
 			print_terminal(*format);

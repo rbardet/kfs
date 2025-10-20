@@ -87,7 +87,7 @@ static int printk_format(va_list list, const char format) {
 		// 	print_terminal(va_arg(list, char));
 		// 	return (1);
 		case 's':
-			const char *str = va_arg(list, char *);
+			const char *str = va_arg(list, const char *);
 			return (putstrk(str));
 	}
 	return (len);

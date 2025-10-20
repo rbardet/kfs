@@ -4,7 +4,7 @@ KERNEL_FILE  = kfs/
 BOOT_FILE    = kfs/boot/
 
 CC           = gcc
-CFLAGS       = -m32 -Wall -Wextra -Werror -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs
+CFLAGS       = -m32 -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs
 
 ASM          = nasm
 ASMFLAGS     = -f elf32
@@ -17,11 +17,11 @@ OBJ          = obj/
 SRC          = src
 X86          = $(SRC)/x86
 STRING       = $(SRC)/lib/string
-TERMINAL     = $(SRC)/graphic/terminal
+DEBUG        = $(SRC)/debug
 
 C_SOURCES    = $(SRC)/kernel.c \
-			   $(STRING)/ft_strlen.c \
-			   $(TERMINAL)/print.c
+			   $(STRING)/strlen.c \
+			   $(DEBUG)/printk.c \
 
 ASM_SOURCES  = $(X86)/boot.s
 

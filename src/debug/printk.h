@@ -4,7 +4,6 @@
 #define VRAM 0xb8000
 
 #include "../lib/lib.h"
-#include "../lib/type.h"
 #include "stdarg.h"
 
 #define WIDTH 80

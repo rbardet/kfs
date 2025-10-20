@@ -30,7 +30,7 @@ ASM_SOURCES  = $(X86)/boot.s
 C_OBJECTS    = $(C_SOURCES:$(SRC)/%.c=$(OBJ)/%.o)
 ASM_OBJECTS  = $(ASM_SOURCES:$(SRC)/%.s=$(OBJ)/%.o)
 
-GRUB         = grub-mkrescue
+GRUB         = grub-mkrescue --compress=gz
 QEMU         = qemu-system-i386
 
 all: $(BIN) $(NAME)

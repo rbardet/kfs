@@ -16,11 +16,12 @@ BIN          = bin/
 OBJ          = obj/
 SRC          = src
 X86          = $(SRC)/x86
-STRING       = $(SRC)/lib/string
+LIB          = $(SRC)/lib
 DEBUG        = $(SRC)/debug
 
 C_SOURCES    = $(SRC)/kernel.c \
-			   $(STRING)/strlen.c \
+			   $(LIB)/strlen.c \
+			   $(LIB)/memset.c \
 			   $(DEBUG)/printk.c \
 
 ASM_SOURCES  = $(X86)/boot.s

@@ -1,8 +1,10 @@
 #ifndef LIB_H
 #define LIB_H
 
+#include <stddef.h>
+
 #define uint16 unsigned short
-#define size_t long unsigned int
+//#define size_t long unsigned int
 
 size_t strlen(const char *s);
 void *memset(void *s, int c, size_t n);

@@ -14,7 +14,7 @@ void reset() {
 	column = 0;
 	for (uint16 y = 0; y < HEIGHT; y++) {
 		for (uint16 x = 0; x < WIDTH; x++) {
-			vga[y * WIDTH + x] = ' ';
+			vga[y * WIDTH + x] = 0;
 		}
 	}
 }
@@ -88,10 +88,10 @@ static int printk_format(va_list list, const char format) {
 			itoa(num, buffer);
 			return (putstrk(buffer));
 			break;
-		// case 'c':
-		// 	print_terminal(va_arg(list, char));
-		// 	return (1);
-		// 	break;
+		case 'c':
+			print_terminal(va_arg(list, int));
+			return (1);
+			break;
 		case 's':
 			const char *str = va_arg(list, const char *);
 			return (putstrk(str));

@@ -9,6 +9,8 @@
 #define WIDTH 80
 #define HEIGHT 25
 
+
+
 typedef enum {
 	COLOR_BLACK,
 	COLOR_BLUE,
@@ -27,6 +29,11 @@ typedef enum {
 	COLOR_YELLOW,
 	COLOR_WHITE
 } color;
+
+extern uint16 tty_color;
+extern uint16 *vga;
+extern uint16 column;
+extern uint16 line;
 
 typedef enum {
 	KERN_EMERG,

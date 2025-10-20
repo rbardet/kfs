@@ -23,6 +23,7 @@ C_SOURCES    = $(SRC)/kernel.c \
 			   $(LIB)/strlen.c \
 			   $(LIB)/itoa.c \
 			   $(LIB)/memset.c \
+			   $(SRC)/switch_screen/switch_screen.c \
 			   $(DEBUG)/printk.c \
 
 ASM_SOURCES  = $(X86)/boot.s

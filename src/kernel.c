@@ -2,7 +2,10 @@
 
 void kmain() {
 	reset();
-	printk("TESTTTT\n");
+	set_print_color(COLOR_MAGENTA);
+
+	const char *str = "TESSSSSSSSSSSSST";
+	printk("%s\n", str);
 	printk("TESTTTT\n");
 	return ;
 }

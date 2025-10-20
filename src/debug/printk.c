@@ -83,9 +83,9 @@ static int printk_format(va_list list, const char format) {
 	int len = 0;
 
 	switch (format) {
-		case 'c':
-			print_terminal(va_arg(list, char));
-			return (1);
+		// case 'c':
+		// 	print_terminal(va_arg(list, char));
+		// 	return (1);
 		case 's':
 			const char *str = va_arg(list, char *);
 			return (putstrk(str));

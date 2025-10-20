@@ -21,6 +21,7 @@ DEBUG        = $(SRC)/debug
 
 C_SOURCES    = $(SRC)/kernel.c \
 			   $(LIB)/strlen.c \
+			   $(LIB)/itoa.c \
 			   $(LIB)/memset.c \
 			   $(DEBUG)/printk.c \
 

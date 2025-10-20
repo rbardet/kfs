@@ -6,6 +6,7 @@ void kmain() {
 
 	const char *str = "TESSSSSSSSSSSSST";
 	printk("%s\n", str);
-	printk("TESTTTT\n");
+	for (int i = 0; i < 30; i++)
+		printk("Line number %d\n", i);
 	return ;
 }

@@ -1,7 +1,8 @@
-#include "graphic/terminal/print.h"
+#include "debug/printk.h"
 
 void kmain() {
-	clear_terminal();
-	print_terminal("42", LIGHT_MAGENTA);
+	reset();
+	printk("TESTTTT\n");
+	printk("TESTTTT\n");
 	return ;
 }

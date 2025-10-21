@@ -17,14 +17,18 @@ OBJ          = obj/
 SRC          = src
 X86          = $(SRC)/x86
 LIB          = $(SRC)/lib
-DEBUG        = $(SRC)/debug
+GRAPHIC      = $(SRC)/graphic
+KEYB         = ${SRC}/hardware/keyboard
+INTERRUPT    = ${SRC}/interrupt
 
 C_SOURCES    = $(SRC)/kernel.c \
 			   $(LIB)/strlen.c \
 			   $(LIB)/itoa.c \
 			   $(LIB)/memset.c \
-			   $(SRC)/switch_screen/switch_screen.c \
-			   $(DEBUG)/printk.c \
+			   ${KEYB}/keyboard.c \
+			   ${INTERRUPT}/idt.c \
+			   $(GRAPHIC)/printk.c \
+			   ${GRAPHIC}/switch_screen.c \
 
 ASM_SOURCES  = $(X86)/boot.s
 

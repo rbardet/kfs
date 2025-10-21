@@ -9,19 +9,24 @@ global inb
 global outb
 global keyboard_handler
 global load_idt
+global enable_interrupt
 extern kmain
 extern keyboard_interrupt
-extern 
 start:
 	CALL kmain
 HaltKernel:
 	JMP HaltKernel
 keyboard_handler:
-	PUSHAD
+	PUSHA
 	CALL keyboard_interrupt
-	POPAD
+	MOV al, 0x20
+	OUT 0x20, al
+	POPA
 	IRETD
 
+enable_interrupt:
+	STI
+	RET
 inb:
 	MOV edx, [esp + 4]
 	IN al, dx
@@ -33,6 +38,6 @@ outb:
 	OUT dx, al
 	RET
 load_idt:
-	lea edx, [idtp]
+	mov edx, [esp + 4]
 	lidt [edx]
 	ret

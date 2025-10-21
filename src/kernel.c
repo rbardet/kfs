@@ -6,17 +6,14 @@
 
 void kmain() {
 	terminal_initialize();
+	printk("Starting...\n");
+	
 	init_idt();
-	set_idt_gate();
+	printk("IDT loaded\n");
+	
 	init_kb();
-	set_print_color(COLOR_GREEN);
-	// while (1) {
-	// 	int i = inb(KEYBOARD_PORT);
-	// 	if (i) {
-	// 		char c = keyboard_map[i];
-	// 		printk("%c\n", c);
-	// 	}
-	// }
-	printk("TESSSST");
-	return;
+	printk("KB initialized\n");
+		
+	// enable_interrupt();
+	// printk("Interrupts enabled!\n");
 }

@@ -16,6 +16,6 @@ static const char keyboard_map[128] = {
 	0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 };
 
-extern void keyboard_handler();
+void keyboard_interrupt();
 
 #endif

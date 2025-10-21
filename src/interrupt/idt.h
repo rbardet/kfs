@@ -9,7 +9,6 @@
 #define IDT_SIZE 256
 
 #include "../lib/lib.h"
-#include "../hardware/keyboard/keyboard.h"
 
 struct idt_entry {
 	uint16 offset_low;
@@ -24,9 +23,13 @@ struct idt_ptr {
 	uint32 base;
 } __attribute__((packed));
 
+extern struct idt_entry idtt[IDT_SIZE];
+
 extern uint8 inb(uint16 port);
 extern void outb(uint8 value, uint16 port);
 extern void load_idt(uint32 *idt_adress);
+extern void enable_interrupt();
+extern void keyboard_handler();
 void init_idt();
 void init_kb();
 void set_idt_gate();

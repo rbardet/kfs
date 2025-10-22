@@ -70,6 +70,15 @@ void terminal_initialize() {
 			}
 		}
 	}
+	terminals[1].color = COLOR_BLUE;
+	terminals[2].color = COLOR_LIGHT_BLUE;
+	terminals[3].color = COLOR_BROWN;
+	terminals[4].color = COLOR_LIGHT_CYAN;
+	terminals[5].color = COLOR_CYAN;
+	terminals[6].color = COLOR_LIGHT_RED;
+	terminals[7].color = COLOR_RED;
+	terminals[8].color = COLOR_WHITE;
+	terminals[9].color = COLOR_MAGENTA;
 	tty_color = terminals[0].color << 8;
 	column = terminals[0].column;
 	line = terminals[0].line;

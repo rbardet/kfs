@@ -1,4 +1,5 @@
 #include "shell.h"
+#include "../graphic/switch_screen.h"
 
 #define CLR_INDEX 6
 
@@ -20,6 +21,14 @@ void shell(char *buffer, uint32 limit) {
 
 		if (scancode == 77) {
 			move_cursor(RIGHT);
+			continue ;
+		}
+
+		if (scancode > 1 && scancode <= 10)
+		{
+			switch_terminal(scancode - 2);
+			printk("\n> ");
+			update_cursor(column, line);
 			continue ;
 		}
 
@@ -49,6 +58,7 @@ void shell(char *buffer, uint32 limit) {
 				i--;
 				column--;
 				vga[line * WIDTH + (column)] = ' ' | tty_color;
+				update_cursor(column, line);
 			}
 			continue;
 		}

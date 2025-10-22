@@ -1,15 +1,5 @@
 #include "shell.h"
 
-// https://wiki.osdev.org/Text_Mode_Cursor
-static void update_cursor(int x, int y) {
-	uint16 pos = y * WIDTH + x;
-
-	outb(0x0F, 0x3D4);
-	outb((uint8) (pos & 0xFF), 0x3D5);
-	outb(0x0E, 0x3D4);
-	outb((uint8) ((pos >> 8) & 0xFF), 0x3D5);
-}
-
 #define CLR_INDEX 6
 
 void shell(char *buffer, uint32 limit) {
@@ -17,11 +7,20 @@ void shell(char *buffer, uint32 limit) {
 	uint8 scancode = 0;
 	
 	while (1) {
-		update_cursor(column, line);
 		scancode = read_scancode();
 
 		if (scancode & KEY_RELEASE) {
 			continue;
+		}
+
+		if (scancode == 75) {
+			move_cursor(LEFT);
+			continue ;
+		}
+
+		if (scancode == 77) {
+			move_cursor(RIGHT);
+			continue ;
 		}
 
 		char key = keyboard_map[scancode];
@@ -56,6 +55,7 @@ void shell(char *buffer, uint32 limit) {
 
 		buffer[i++] = key;
 		printk("%c", key);
+		update_cursor(column, line);
 		if (i >= limit - 1) {
 			buffer[i] = '\0';
 			return;

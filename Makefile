@@ -29,7 +29,8 @@ C_SOURCES    = $(SRC)/kernel.c \
 			   ${KEYB}/keyboard.c \
 			   $(GRAPHIC)/printk.c \
 			   ${GRAPHIC}/switch_screen.c \
-			   ${SH}/shell.c
+			   ${SH}/shell.c \
+			   ${SH}/cursor.c
 
 ASM_SOURCES  = $(X86)/boot.s
 

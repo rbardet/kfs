@@ -33,17 +33,6 @@ extern uint16 *vga;
 extern uint16 column;
 extern uint16 line;
 
-typedef enum {
-	KERN_EMERG,
-	KERN_ALERT,
-	KERN_CRIT,
-	KERN_ERR,
-	KERN_WARNING,
-	KERN_NOTICE,
-	KERN_INFO,
-	KERN_DEBUG,
-} kinfo;
-
 void set_print_color(unsigned int color);
 int printk(const char *format, ...);
 void reset();

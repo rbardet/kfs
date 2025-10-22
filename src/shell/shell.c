@@ -1,8 +1,6 @@
 #include "shell.h"
 #include "../graphic/switch_screen.h"
 
-#define CLR_INDEX 6
-
 void shell(char *buffer, uint32 limit) {
 	uint32 i = 0;
 	uint8 scancode = 0;
@@ -11,7 +9,7 @@ void shell(char *buffer, uint32 limit) {
 		scancode = read_scancode();
 
 		if (scancode & KEY_RELEASE) {
-			continue;
+			continue ;
 		}
 
 		if (scancode == 75) {
@@ -35,16 +33,6 @@ void shell(char *buffer, uint32 limit) {
 		char key = keyboard_map[scancode];
 		if (!key) {
 			continue;
-		}
-		
-		if (strncmp(buffer, "color=", 6) == 0) {
-			uint8 c = buffer[CLR_INDEX];
-			if (c >= '1' && c <= '9') {
-				set_print_color(c - '0');
-				buffer[i] = '\0';
-				printk("\n");
-				return;
-			}
 		}
 
 		if (key == '\n') {

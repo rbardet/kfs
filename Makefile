@@ -19,16 +19,17 @@ X86          = $(SRC)/x86
 LIB          = $(SRC)/lib
 GRAPHIC      = $(SRC)/graphic
 KEYB         = ${SRC}/hardware/keyboard
-INTERRUPT    = ${SRC}/interrupt
+SH        = ${SRC}/shell
 
 C_SOURCES    = $(SRC)/kernel.c \
 			   $(LIB)/strlen.c \
 			   $(LIB)/itoa.c \
 			   $(LIB)/memset.c \
+			   $(LIB)/strcmp.c \
 			   ${KEYB}/keyboard.c \
-			   ${INTERRUPT}/idt.c \
 			   $(GRAPHIC)/printk.c \
 			   ${GRAPHIC}/switch_screen.c \
+			   ${SH}/shell.c
 
 ASM_SOURCES  = $(X86)/boot.s
 
@@ -52,7 +53,7 @@ $(OBJ)/%.o: $(SRC)/%.s
 	$(ASM) $(ASMFLAGS) $< -o $@
 
 $(KERNEL): $(C_OBJECTS) $(ASM_OBJECTS)
-	$(LINK_FLAGS) $(LINKER) -o $@ $(C_OBJECTS) $(ASM_OBJECTS)
+	$(LINK_FLAGS) $(LINKER) -o $@  $(ASM_OBJECTS) $(C_OBJECTS)
 	mv $@ $(BOOT_FILE)
 
 $(NAME): $(KERNEL)

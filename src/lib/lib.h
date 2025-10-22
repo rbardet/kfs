@@ -10,5 +10,7 @@
 size_t strlen(const char *s);
 void *memset(void *s, int c, size_t n);
 char *itoa(int value, char *str);
+int	strcmp(char *s1, char *s2);
+int	strncmp(char *s1, char *s2, size_t n);
 
 #endif

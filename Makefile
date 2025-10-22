@@ -19,7 +19,7 @@ X86          = $(SRC)/x86
 LIB          = $(SRC)/lib
 GRAPHIC      = $(SRC)/graphic
 KEYB         = ${SRC}/hardware/keyboard
-SH        = ${SRC}/shell
+SH           = ${SRC}/shell
 
 C_SOURCES    = $(SRC)/kernel.c \
 			   $(LIB)/strlen.c \

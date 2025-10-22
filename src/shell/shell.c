@@ -24,7 +24,7 @@ void shell(char *buffer, uint32 limit) {
 			continue ;
 		}
 
-		if (scancode > 1 && scancode <= 10)
+		if (scancode > 1 && scancode <= 11)
 		{
 			switch_terminal(scancode - 2);
 			printk("\n> ");

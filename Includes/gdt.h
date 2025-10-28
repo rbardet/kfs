@@ -1,6 +1,8 @@
 #ifndef GDT_H
 #define GDT_H
 
+// https://wiki.osdev.org/GDT_Tutorial
+
 #define SEG_DESCTYPE(x)  ((x) << 0x04) // Descriptor type (0 for system, 1 for code/data)
 #define SEG_PRES(x)      ((x) << 0x07) // Present
 #define SEG_SAVL(x)      ((x) << 0x0C) // Available for system use
@@ -41,5 +43,7 @@
 #define GDT_DATA_PL3 SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
 					 SEG_LONG(0)     | SEG_SIZE(1) | SEG_GRAN(1) | \
 					 SEG_PRIV(3)     | SEG_DATA_RDWR
+
+#define GDT_ADRESS 0x00000800
 
 #endif

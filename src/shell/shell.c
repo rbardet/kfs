@@ -1,5 +1,5 @@
 #include "shell.h"
-#include "../graphic/switch_screen.h"
+#include "switch_screen.h"
 
 void shell(char *buffer, uint32 limit) {
 	uint32 i = 0;

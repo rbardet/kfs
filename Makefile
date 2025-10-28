@@ -40,6 +40,8 @@ ASM_OBJECTS  = $(ASM_SOURCES:$(SRC)/%.s=$(OBJ)/%.o)
 GRUB         = grub-mkrescue --compress=gz
 QEMU         = qemu-system-i386
 
+INCLUDES = -I Includes
+
 all: $(BIN) $(NAME)
 
 $(BIN):
@@ -47,7 +49,7 @@ $(BIN):
 
 $(OBJ)/%.o: $(SRC)/%.c
 	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -c ${INCLUDES} $< -o $@
 
 $(OBJ)/%.o: $(SRC)/%.s
 	mkdir -p $(dir $@)

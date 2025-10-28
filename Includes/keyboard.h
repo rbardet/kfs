@@ -5,8 +5,8 @@
 #define KEYBOARD_STATUS_PORT 0x64
 #define KEY_RELEASE 0x80
 
-#include "../../graphic/printk.h"
-#include "../../lib/lib.h"
+#include "printk.h"
+#include "lib.h"
 
 static const char keyboard_map[128] = {
 	0,27,'1','2','3','4','5','6','7','8','9','0','-','=','\b',

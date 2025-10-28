@@ -1,8 +1,8 @@
-#include "graphic/printk.h"
-#include "graphic/switch_screen.h"
-#include "hardware/keyboard/keyboard.h"
-#include "shell/shell.h"
-#include "lib/lib.h"
+#include "printk.h"
+#include "switch_screen.h"
+#include "keyboard.h"
+#include "shell.h"
+#include "lib.h"
 
 void kmain() {
 	uint8 buffer[BUFFER_SIZE];

@@ -3,7 +3,7 @@
 
 #define BUFFER_SIZE 256
 
-#include "../hardware/keyboard/keyboard.h"
+#include "keyboard.h"
 
 typedef enum {
 	LEFT = 77,

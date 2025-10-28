@@ -22,6 +22,7 @@ KEYB         = ${SRC}/hardware/keyboard
 SH           = ${SRC}/shell
 
 C_SOURCES    = $(SRC)/kernel.c \
+			   ${SRC}/gdt.c \
 			   $(LIB)/strlen.c \
 			   $(LIB)/itoa.c \
 			   $(LIB)/memset.c \

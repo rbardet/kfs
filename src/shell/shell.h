@@ -12,6 +12,6 @@ typedef enum {
 
 void shell(char *buffer, uint32 limit);
 void update_cursor(int x, int y);
-void move_cursor();
+void move_cursor(arrow dir);
 
 #endif

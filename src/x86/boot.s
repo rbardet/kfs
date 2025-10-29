@@ -32,6 +32,7 @@ load_gdt:
 	MOV eax, [esp + 4]
 	LGDT [eax]
 	CALL reload_segments
+	STI
 	RET
 
 reload_segments:

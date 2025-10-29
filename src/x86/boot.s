@@ -11,7 +11,7 @@ global load_gdt
 extern kmain
 
 start:
-	;CLI ; disable interrupt
+	CLI ; disable interrupt
 	CALL kmain
 ; askip c'est dangereux de les laisser pendant 
 ; le setup de la gdt :

@@ -31,3 +31,16 @@ outb:
 load_gdt:
 	MOV eax, [esp + 4]
 	LGDT [eax]
+	CALL reload_segments
+	RET
+
+reload_segments:
+	JMP 0x08:.reload
+.reload:
+	MOV ax, 0x10
+	MOV ds, ax
+	MOV es, ax
+	MOV fs, ax
+	MOV gs, ax
+	MOV ss, ax
+	RET

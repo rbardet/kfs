@@ -7,14 +7,15 @@ section .text
 global start
 global inb
 global outb
+global load_gdt
 extern kmain
 
 start:
-	CLI // disable interrupt
+	;CLI ; disable interrupt
 	CALL kmain
-// askip c'est dangereux de les laisser pendant 
-// le setup de la gdt :
-// https://wiki.osdev.org/GDT_Tutorial#How_to_Set_Up_The_GDT
+; askip c'est dangereux de les laisser pendant 
+; le setup de la gdt :
+; https://wiki.osdev.org/GDT_Tutorial#How_to_Set_Up_The_GDT
 
 inb:
 	MOV edx, [esp + 4]
@@ -27,6 +28,6 @@ outb:
 	OUT dx, al
 	RET
 
-load_gdtr:
+load_gdt:
 	MOV eax, [esp + 4]
 	LGDT [eax]

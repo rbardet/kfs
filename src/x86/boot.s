@@ -11,11 +11,7 @@ global load_gdt
 extern kmain
 
 start:
-	CLI ; disable interrupt
 	CALL kmain
-; askip c'est dangereux de les laisser pendant 
-; le setup de la gdt :
-; https://wiki.osdev.org/GDT_Tutorial#How_to_Set_Up_The_GDT
 
 inb:
 	MOV edx, [esp + 4]
@@ -31,17 +27,13 @@ outb:
 load_gdt:
 	MOV eax, [esp + 4]
 	LGDT [eax]
-	CALL reload_segments
-	STI
+	; MOV ax, 0x10
+	; MOV ds, ax
+	; MOV es, ax
+	; MOV fs, ax
+	; MOV gs, ax
+	; MOV ss, ax
+	; JMP 0x08:reload
 	RET
-
-reload_segments:
-	JMP 0x08:.reload
-.reload:
-	MOV ax, 0x10
-	MOV ds, ax
-	MOV es, ax
-	MOV fs, ax
-	MOV gs, ax
-	MOV ss, ax
+reload:
 	RET

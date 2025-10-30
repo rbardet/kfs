@@ -4,6 +4,7 @@
 #define BUFFER_SIZE 256
 
 #include "keyboard.h"
+#include "command.h"
 
 typedef enum {
 	LEFT = 77,

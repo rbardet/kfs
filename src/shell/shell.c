@@ -22,13 +22,6 @@ void shell(char *buffer, uint32 limit) {
 			continue ;
 		}
 
-		if (scancode > 1 && scancode <= 11)
-		{
-			switch_terminal(scancode - 2);
-			printk("\n> ");
-			update_cursor(column, line);
-			continue ;
-		}
 
 		char key = keyboard_map[scancode];
 		if (!key) {
@@ -38,6 +31,7 @@ void shell(char *buffer, uint32 limit) {
 		if (key == '\n') {
 			buffer[i] = '\0';
 			printk("\n");
+			execute_command(buffer);
 			return;
 		}
 

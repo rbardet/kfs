@@ -12,7 +12,7 @@ typedef enum {
 } arrow;
 
 void shell(char *buffer, uint32 limit);
-void update_cursor(int x, int y);
+void update_cursor();
 void move_cursor(arrow dir);
 
 #endif

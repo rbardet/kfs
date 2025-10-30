@@ -2,8 +2,8 @@
 
 // https://wiki.osdev.org/Text_Mode_Cursor
 
-void update_cursor(int x, int y) {
-	uint16 pos = y * WIDTH + x;
+void update_cursor() {
+	uint16 pos = line * WIDTH + column;
 
 	outb(0x0F, 0x3D4);
 	outb((uint8) (pos & 0xFF), 0x3D5);
@@ -18,13 +18,13 @@ void move_cursor(arrow dir) {
 
 	if (dir == LEFT) {
 		column--;
-		update_cursor(column, line);
+		update_cursor();
 		return ;
 	}
 
 	if (dir == RIGHT) {
 		column++;
-		update_cursor(column, line);
+		update_cursor();
 		return ;
 	}
 }

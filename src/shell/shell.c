@@ -40,14 +40,14 @@ void shell(char *buffer, uint32 limit) {
 				i--;
 				column--;
 				vga[line * WIDTH + (column)] = ' ' | tty_color;
-				update_cursor(column, line);
+				update_cursor();
 			}
 			continue;
 		}
 
 		buffer[i++] = key;
 		printk("%c", key);
-		update_cursor(column, line);
+		update_cursor();
 		if (i >= limit - 1) {
 			buffer[i] = '\0';
 			return;

@@ -15,7 +15,7 @@ void kmain() {
 
 	while (1) {
 		printk("> ");
-		update_cursor(column, line);
+		update_cursor();
 		memset(buffer, 0, sizeof(buffer));
 		shell(buffer, sizeof(buffer));
 	}

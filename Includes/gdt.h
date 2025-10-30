@@ -48,7 +48,7 @@
 					SEG_PRIV(3)     | SEG_DATA_RDWR
 
 #define GDT_ADRESS 0x00000800
-#define GDT_ENTRY_SIZE 7
+#define GDT_ENTRY_SIZE 5
 
 typedef struct {
 	uint16	limit;
@@ -60,8 +60,8 @@ typedef struct {
 }  __attribute__((packed)) GDT_TABLE;
 
 typedef struct {
-	uint32 base;
 	uint16 limit;
+	uint32 base;
 }  __attribute__((packed)) GDT_PTR;
 
 extern void load_gdt(uint32 gdt);

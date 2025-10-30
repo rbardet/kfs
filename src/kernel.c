@@ -9,6 +9,7 @@ void kmain() {
 	init_gdt();
 	uint8 buffer[BUFFER_SIZE];
 	terminal_initialize();
+	switch_terminal(1);
 	set_print_color(COLOR_LIGHT_MAGENTA);
 	printk("42 - kfs1\n");
 

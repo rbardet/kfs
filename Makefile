@@ -43,7 +43,7 @@ QEMU         = qemu-system-i386
 
 INCLUDES = -I Includes
 
-all: $(BIN) $(NAME)
+all: fclean $(BIN) $(NAME)
 
 $(BIN):
 	mkdir -p $@

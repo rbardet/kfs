@@ -12,6 +12,11 @@
 #define int64 long long
 #define uint64 unsigned long long
 
+typedef enum {
+	false,
+	true
+}	bool;
+
 size_t strlen(const char *s);
 void *memset(void *s, int c, size_t n);
 char *itoa(int value, char *str);

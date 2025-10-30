@@ -16,7 +16,7 @@
  
 #define SEG_DATA_RDWR 0x02 // Read/Write
 #define SEG_CODE_EXRD 0x0A // Execute/Read
-#define SEG_GRAN_1 0xCF
+#define SEG_DEFAULT_FLAGS 0xCF 
 
 #define GDT_KERNEL_CODE SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
 					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
@@ -25,7 +25,9 @@
 #define GDT_KERNEL_DATA SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
 					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
 					SEG_PRIV(0) | SEG_DATA_RDWR
- 
+
+#define GDT_KERNEL_STACK GDT_KERNEL_DATA
+
 #define GDT_USER_CODE SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
 					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
 					SEG_PRIV(3) | SEG_CODE_EXRD
@@ -34,7 +36,12 @@
 					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
 					SEG_PRIV(3) | SEG_DATA_RDWR
 
-#define GDT_ENTRY_SIZE 5
+#define GDT_USER_STACK GDT_USER_DATA
+
+#define GDT_ENTRY_SIZE 7
+#define STACK_SIZE 8192
+#define KERNEL_STACK_BASE
+#define USER_STACK_BASE
 
 typedef struct {
 	uint16	limit;

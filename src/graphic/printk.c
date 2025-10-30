@@ -78,6 +78,48 @@ static int putstrk(const char *str) {
 	return (len);
 }
 
+static void convert(uint64 nb, const char *base) {
+	if (nb >= 16) {
+		convert(nb / 16, base);
+		convert(nb % 16, base);
+	}
+	else {
+		printk("%c\n", base[nb]);
+	}
+}
+
+static int puthexk(uint32 nb, bool isUpper) {
+	int				len;
+	unsigned int	tmp;
+	char			*base;
+
+	if (isUpper) {
+		base = HEXA_BASE_UPPER;
+	} else {
+		base = HEXA_BASE_LOWER;
+	}
+
+	len = 0;
+	tmp = nb;
+	if (nb == 0)
+		len = 1;
+	else {
+		while (tmp != 0) {
+			tmp /= 16;
+			len++;
+		}
+	}
+	convert(nb, base);
+	return (len);
+}
+
+static int putptrk(uint64 ptr) {
+	int len = 0;
+	len += putstrk("0x");
+	len += puthexk(ptr, false);
+	return (len);
+}
+
 static int printk_format(va_list list, const char format) {
 	int len = 0;
 
@@ -95,6 +137,12 @@ static int printk_format(va_list list, const char format) {
 		case 's':
 			const char *str = va_arg(list, const char *);
 			return (putstrk(str));
+		case 'x':
+			return(puthexk(va_arg(list, uint64), false));
+		case 'X':
+			return(puthexk(va_arg(list, uint64), true));
+		case 'p':
+			return(putptrk(va_arg(list , uint64)));
 	}
 	return (len);
 }

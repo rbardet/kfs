@@ -9,6 +9,9 @@
 #define WIDTH 80
 #define HEIGHT 25
 
+#define HEXA_BASE_LOWER "0123456789abcdef"
+#define HEXA_BASE_UPPER "0123456789ABCDEF"
+
 typedef enum {
 	COLOR_BLACK,
 	COLOR_BLUE,

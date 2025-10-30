@@ -47,8 +47,8 @@
 					SEG_LONG(0)     | SEG_SIZE(1) | SEG_GRAN(1) | \
 					SEG_PRIV(3)     | SEG_DATA_RDWR
 
-#define GDT_ADRESS 0x00000800
 #define GDT_ENTRY_SIZE 5
+#define SEG_GRAN_1 0xCF
 
 typedef struct {
 	uint16	limit;

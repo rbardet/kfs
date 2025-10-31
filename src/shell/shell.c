@@ -4,7 +4,8 @@
 void shell(char *buffer, uint32 limit) {
 	uint32 i = 0;
 	uint8 scancode = 0;
-	
+	uint32 len = 0;
+
 	while (1) {
 		scancode = read_scancode();
 
@@ -14,10 +15,14 @@ void shell(char *buffer, uint32 limit) {
 
 		if (scancode == 75) {
 			move_cursor(LEFT);
+			i--;
 			continue ;
 		}
 
 		if (scancode == 77) {
+			if (i < len) {
+				i++;
+			}
 			move_cursor(RIGHT);
 			continue ;
 		}
@@ -29,7 +34,7 @@ void shell(char *buffer, uint32 limit) {
 		}
 
 		if (key == '\n') {
-			buffer[i] = '\0';
+			buffer[len] = '\0';
 			printk("\n");
 			execute_command(buffer);
 			return;
@@ -50,7 +55,10 @@ void shell(char *buffer, uint32 limit) {
 		update_cursor();
 		if (i >= limit - 1) {
 			buffer[i] = '\0';
+			printk("\n");
 			return;
 		}
+
+		len++;
 	}
 }

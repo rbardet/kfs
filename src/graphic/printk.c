@@ -86,7 +86,6 @@ static void convert(uint64 nb, const char *base) {
 	else {
 		printk("%c", base[nb]);
 	}
-	printk("\n");
 }
 
 static int puthexk(uint32 nb, bool isUpper) {

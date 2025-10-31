@@ -10,7 +10,7 @@ static void switch_color(uint8 c) {
 	}
 }
 
-static void switch_terminal(uint8 t) {
+static void terminal_switch(uint8 t) {
 	if (t >= 0 && t <= 9) {
 		switch_terminal(t);
 		return;
@@ -58,7 +58,7 @@ void execute_command(char *command) {
 
 	if (strncmp(command, "terminal=", 9) == 0) {
 		uint8 t = command[9] - '0';
-		switch_terminal(t);
+		terminal_switch(t);
 		return ;
 	}
 

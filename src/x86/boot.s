@@ -5,31 +5,10 @@ section .text
 	DD -(0x1BADB002 + 0x00000000)
 
 global start
-global inb
-global outb
-global outw
 global load_gdt
 extern kmain
-
 start:
 	CALL kmain
-
-inb:
-	MOV edx, [esp + 4]
-	IN al, dx
-	RET
-
-outb:
-	MOV eax, [esp + 4]
-	MOV edx, [esp + 8]
-	OUT dx, al
-	RET
-
-outw:
-	MOV eax, [esp + 4]
-	MOV edx, [esp + 8]
-	OUT dx, ax
-	RET
 
 load_gdt:
 	MOV eax, [esp + 4]
@@ -39,6 +18,7 @@ load_gdt:
 	MOV es, ax
 	MOV fs, ax
 	MOV gs, ax
+	MOV ax, 0x18
 	MOV ss, ax
 	JMP 0x08:.reload
 	RET

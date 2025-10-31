@@ -19,6 +19,7 @@ void kmain() {
 	printk("      | $$| $$$$$$$$      | $$ \\  $$| $$     |  $$$$$$/\n");
 	printk("      |__/|________/      |__/  \\__/|__/      \\______/ \n");
 
+	khexdump((void *)0x00000800, 16);
 	while (1) {
 		printk("> ");
 		update_cursor();

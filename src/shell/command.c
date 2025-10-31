@@ -84,7 +84,7 @@ void execute_command(char *command) {
 	}
 
 	if (strcmp(command, "stack") == 0) {
-		khexdump(get_stack_top(), 20);
+		khexdump(get_stack_top(), 16);
 		return;
 	}
 

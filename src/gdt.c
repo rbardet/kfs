@@ -3,7 +3,7 @@
 // https://wiki.osdev.org/GDT_Tutorial
 
 GDT_TABLE gdt[GDT_ENTRY_SIZE] __attribute__((section(".gdt")));
-GDT_PTR *gdt_ptr;
+GDT_PTR *gdt_ptr = (GDT_PTR *)GDT_ADRESS;
 
 static void create_table(uint32 base, uint32 limit, uint16 access, uint8 flags, uint32 entry) {
 	gdt[entry].limit = (limit & 0xFFFF);
@@ -26,8 +26,4 @@ void init_gdt() {
 	create_table(0, 0xFFFFF, (uint16)GDT_USER_DATA, (uint8)SEG_DEFAULT_FLAGS, 5);
 	create_table(0, 0xFFFFF, (uint16)GDT_KERNEL_STACK, (uint8)SEG_DEFAULT_FLAGS, 6);
 	load_gdt((uint32)gdt_ptr);
-}
-
-void print_kstack() {
-
 }

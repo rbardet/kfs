@@ -14,7 +14,7 @@ void reset() {
 	column = 0;
 	for (uint16 y = 0; y < HEIGHT; y++) {
 		for (uint16 x = 0; x < WIDTH; x++) {
-			vga[y * WIDTH + x] = 0;
+			vga[y * WIDTH + x] = 0 | tty_color;
 		}
 	}
 }

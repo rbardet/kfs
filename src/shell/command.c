@@ -74,7 +74,7 @@ void execute_command(char *command) {
 
 	if (strcmp(command, "halt") == 0) {
 		printk("Halting CPU...\n");
-		// TODO: Implement halt functionality
+		halt();
 		return;
 	}
 

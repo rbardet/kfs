@@ -21,12 +21,9 @@ void init_gdt() {
 	create_table(0, 0, 0, 0, 0);
 	create_table(0, 0xFFFFF, (uint16)GDT_KERNEL_CODE, (uint8)SEG_DEFAULT_FLAGS, 1);
 	create_table(0, 0xFFFFF, (uint16)GDT_KERNEL_DATA, (uint8)SEG_DEFAULT_FLAGS, 2);
-	// kernel stack
 	create_table(0, 0xFFFFF, (uint16)GDT_KERNEL_STACK, (uint8)SEG_DEFAULT_FLAGS, 3);
-
 	create_table(0, 0xFFFFF, (uint16)GDT_USER_CODE, (uint8)SEG_DEFAULT_FLAGS, 4);
 	create_table(0, 0xFFFFF, (uint16)GDT_USER_DATA, (uint8)SEG_DEFAULT_FLAGS, 5);
-	// user stack
 	create_table(0, 0xFFFFF, (uint16)GDT_KERNEL_STACK, (uint8)SEG_DEFAULT_FLAGS, 6);
 	load_gdt((uint32)gdt_ptr);
 }

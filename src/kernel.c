@@ -19,9 +19,9 @@ void kmain() {
 	printk("      | $$| $$$$$$$$      | $$ \\  $$| $$     |  $$$$$$/\n");
 	printk("      |__/|________/      |__/  \\__/|__/      \\______/ \n");
 
-	khexdump((void *)0x00000800, 16);
+	khexdump((void *)GDT_ADRESS, 16);
 	while (1) {
-		printk("> ");
+		printk(">");
 		update_cursor();
 		memset(buffer, 0, sizeof(buffer));
 		shell(buffer, sizeof(buffer));

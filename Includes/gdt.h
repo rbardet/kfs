@@ -59,5 +59,6 @@ typedef struct {
 
 extern void load_gdt(uint32 gdt);
 void init_gdt();
+extern void *get_stack_top();
 
 #endif

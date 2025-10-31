@@ -39,9 +39,6 @@
 #define GDT_USER_STACK GDT_USER_DATA
 
 #define GDT_ENTRY_SIZE 7
-#define STACK_SIZE 8192
-#define KERNEL_STACK_BASE
-#define USER_STACK_BASE
 
 typedef struct {
 	uint16	limit;

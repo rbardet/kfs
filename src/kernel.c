@@ -9,9 +9,15 @@ void kmain() {
 	init_gdt();
 	uint8 buffer[BUFFER_SIZE];
 	terminal_initialize();
-	switch_terminal(1);
-	set_print_color(COLOR_LIGHT_MAGENTA);
-	printk("42 - kfs1\n");
+	set_print_color(COLOR_LIGHT_BLUE);
+	printk(" /$$   /$$  /$$$$$$        /$$   /$$ /$$$$$$$$ /$$$$$$\n");
+	printk("| $$  | $$ /$$__  $$      | $$  /$$/| $$_____//$$__  $$\n");
+	printk("| $$  | $$|__/  \\ $$      | $$ /$$/ | $$     | $$  \\__/\n");
+	printk("| $$$$$$$$  /$$$$$$/      | $$$$$/  | $$$$$  |  $$$$$$ \n");
+	printk("|_____  $$ /$$____/       | $$  $$  | $$__/   \\____  $$\n");
+	printk("      | $$| $$            | $$\\  $$ | $$      /$$  \\ $$\n");
+	printk("      | $$| $$$$$$$$      | $$ \\  $$| $$     |  $$$$$$/\n");
+	printk("      |__/|________/      |__/  \\__/|__/      \\______/ \n");
 
 	while (1) {
 		printk("> ");

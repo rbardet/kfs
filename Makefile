@@ -23,6 +23,7 @@ SH           = ${SRC}/shell
 
 C_SOURCES    = $(SRC)/kernel.c \
 			   ${SRC}/gdt.c \
+			   $(LIB)/khexdump.c \
 			   $(LIB)/strlen.c \
 			   $(LIB)/itoa.c \
 			   $(LIB)/memset.c \
@@ -34,12 +35,14 @@ C_SOURCES    = $(SRC)/kernel.c \
 			   ${SH}/command.c \
 			   ${SH}/cursor.c
 
-ASM_SOURCES  = $(X86)/boot.s
+ASM_SOURCES  = $(X86)/boot.s \
+			   $(X86)/io.s \
+			   $(X86)/stack.s
 
 C_OBJECTS    = $(C_SOURCES:$(SRC)/%.c=$(OBJ)/%.o)
 ASM_OBJECTS  = $(ASM_SOURCES:$(SRC)/%.s=$(OBJ)/%.o)
 
-GRUB         = grub-mkrescue --compress=gz
+GRUB         = grub-mkrescue # --compress=gz
 QEMU         = qemu-system-i386
 
 INCLUDES = -I Includes

@@ -12,6 +12,8 @@
 #define int64 long long
 #define uint64 unsigned long long
 
+#include "printk.h"
+
 typedef enum {
 	false,
 	true
@@ -22,5 +24,6 @@ void *memset(void *s, int c, size_t n);
 char *itoa(int value, char *str);
 int	strcmp(char *s1, char *s2);
 int	strncmp(char *s1, char *s2, size_t n);
+void khexdump(const void *data, uint32 size);
 
 #endif

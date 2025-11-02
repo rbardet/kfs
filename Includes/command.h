@@ -7,6 +7,9 @@
 #include "keyboard.h"
 #include "gdt.h"
 
+#define SIG_SHUTDOWN 0x2000
+#define ACPI_PORT 0x604
+
 void execute_command(char *command);
 extern void halt();
 

@@ -24,14 +24,14 @@ static void reboot() {
 	printk("Rebooting system...\n");
 	uint8 good = 0x02;
 	while (good & 0x02) 
-		good = inb(0x64);
-	outb(0xFE, 0x64);
+		good = inb(KEYBOARD_STATUS_PORT);
+	outb(0xFE, KEYBOARD_STATUS_PORT);
 	return;
 }
 
 static void shutdown() {
 	printk("Shutting down system...\n");
-	outw(0x2000, 0x604);
+	outw(SIG_SHUTDOWN, ACPI_PORT);
 	return;
 }
 
@@ -84,7 +84,7 @@ void execute_command(char *command) {
 	}
 
 	if (strcmp(command, "stack") == 0) {
-		khexdump(get_stack_top(), 16);
+		khexdump(get_stack_top("Hello World"), 48);
 		return;
 	}
 

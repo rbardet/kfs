@@ -16,6 +16,7 @@
  
 #define SEG_DATA_RDWR 0x02 // Read/Write
 #define SEG_CODE_EXRD 0x0A // Execute/Read
+#define SEG_DATA_RDWREXPD 0x06 // Read/Write, expand-down
 #define SEG_DEFAULT_FLAGS 0xCF 
 
 #define GDT_KERNEL_CODE SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
@@ -26,7 +27,9 @@
 					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
 					SEG_PRIV(0) | SEG_DATA_RDWR
 
-#define GDT_KERNEL_STACK GDT_KERNEL_DATA
+#define GDT_KERNEL_STACK SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
+					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
+					SEG_PRIV(0) | SEG_DATA_RDWREXPD
 
 #define GDT_USER_CODE SEG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
 					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
@@ -36,9 +39,13 @@
 					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
 					SEG_PRIV(3) | SEG_DATA_RDWR
 
-#define GDT_USER_STACK GDT_USER_DATA
+#define GDT_USER_STACK EG_DESCTYPE(1) | SEG_PRES(1) | SEG_SAVL(0) | \
+					SEG_LONG(0) | SEG_SIZE(1) | SEG_GRAN(1) | \
+					SEG_PRIV(3) | SEG_DATA_RDWREXPD
 
 #define GDT_ENTRY_SIZE 7
+
+#define GDT_ADRESS 0x00000800
 
 typedef struct {
 	uint16	limit;
@@ -56,6 +63,6 @@ typedef struct {
 
 extern void load_gdt(uint32 gdt);
 void init_gdt();
-extern void *get_stack_top();
+extern void *get_stack_top(const char *);
 
 #endif

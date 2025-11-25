@@ -66,7 +66,7 @@ $(KERNEL): $(C_OBJECTS) $(ASM_OBJECTS)
 
 $(NAME): $(KERNEL)
 	$(GRUB) -o $@ $(KERNEL_FILE)
-	mkdir ${BIN}
+	mkdir -p ${BIN}
 	mv $@ $(BIN)
 
 run: $(NAME)

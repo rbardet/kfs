@@ -3,14 +3,14 @@
 
 #include <stddef.h>
 
-#define int8 signed char
-#define uint8 unsigned char
-#define int16 short
-#define uint16 unsigned short
-#define int32 int
-#define uint32 unsigned int
-#define int64 long long
-#define uint64 unsigned long long
+#define i8 signed char
+#define u8 unsigned char
+#define i16 short
+#define u16 unsigned short
+#define i32 int
+#define u32 unsigned int
+#define i64 long long
+#define u64 unsigned long long
 
 #include "printk.h"
 
@@ -24,6 +24,6 @@ void *memset(void *s, int c, size_t n);
 char *itoa(int value, char *str);
 int	strcmp(char *s1, char *s2);
 int	strncmp(char *s1, char *s2, size_t n);
-void khexdump(const void *data, uint32 size);
+void khexdump(const void *data, u32 size);
 
 #endif

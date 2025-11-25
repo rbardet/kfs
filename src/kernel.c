@@ -7,7 +7,7 @@
 
 void kmain() {
 	init_gdt();
-	uint8 buffer[BUFFER_SIZE];
+	u8 buffer[BUFFER_SIZE];
 	terminal_initialize();
 	set_print_color(COLOR_LIGHT_BLUE);
 	printk(" /$$   /$$  /$$$$$$        /$$   /$$ /$$$$$$$$ /$$$$$$\n");

@@ -18,9 +18,9 @@ static const char keyboard_map[128] = {
 	0, 0, 0, 0, 0,0,0,0,0,0,0,0,0,0,0,0
 };
 
-extern uint8 inb(uint16 port);
-extern void outb(uint8 value, uint16 port);
-extern void outw(uint16 value, uint16 port);
-uint8 read_scancode();
+extern u8 inb(u16 port);
+extern void outb(u8 value, u16 port);
+extern void outw(u16 value, u16 port);
+u8 read_scancode();
 
 #endif

@@ -48,20 +48,20 @@
 #define GDT_ADRESS 0x00000800
 
 typedef struct {
-	uint16	limit;
-	uint16	low_base;
-	uint8	middle_base;
-	uint8	access;
-	uint8	flags;
-	uint8	high_base;
+	u16	limit;
+	u16	low_base;
+	u8	middle_base;
+	u8	access;
+	u8	flags;
+	u8	high_base;
 }  __attribute__((packed)) GDT_TABLE;
 
 typedef struct {
-	uint16 limit;
-	uint32 base;
+	u16 limit;
+	u32 base;
 }  __attribute__((packed)) GDT_PTR;
 
-extern void load_gdt(uint32 gdt);
+extern void load_gdt(u32 gdt);
 void init_gdt();
 extern void *get_stack_top(const char *);
 

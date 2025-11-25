@@ -11,7 +11,7 @@ typedef enum {
 	RIGHT = 75
 } arrow;
 
-void shell(char *buffer, uint32 limit);
+void shell(char *buffer, u32 limit);
 void update_cursor();
 void move_cursor(arrow dir);
 

@@ -1,6 +1,6 @@
 #include "command.h"
 
-static void switch_color(uint8 c) {
+static void switch_color(u8 c) {
 	if (c >= '1' && c <= '9') {
 		set_print_color(c - '0');
 		return;
@@ -10,7 +10,7 @@ static void switch_color(uint8 c) {
 	}
 }
 
-static void terminal_switch(uint8 t) {
+static void terminal_switch(u8 t) {
 	if (t >= 0 && t <= 9) {
 		switch_terminal(t);
 		return;
@@ -22,7 +22,7 @@ static void terminal_switch(uint8 t) {
 
 static void reboot() {
 	printk("Rebooting system...\n");
-	uint8 good = 0x02;
+	u8 good = 0x02;
 	while (good & 0x02) 
 		good = inb(KEYBOARD_STATUS_PORT);
 	outb(0xFE, KEYBOARD_STATUS_PORT);
@@ -51,13 +51,13 @@ void execute_command(char *command) {
 	}
 
 	if (strncmp(command, "color=", 6) == 0) {
-		uint8 c = command[6];
+		u8 c = command[6];
 		switch_color(c);
 		return ;
 	}
 
 	if (strncmp(command, "terminal=", 9) == 0) {
-		uint8 t = command[9] - '0';
+		u8 t = command[9] - '0';
 		terminal_switch(t);
 		return ;
 	}

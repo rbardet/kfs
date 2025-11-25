@@ -1,10 +1,10 @@
 #include "shell.h"
 #include "switch_screen.h"
 
-void shell(char *buffer, uint32 limit) {
-	uint32 i = 0;
-	uint8 scancode = 0;
-	uint32 len = 0;
+void shell(char *buffer, u32 limit) {
+	u32 i = 0;
+	u8 scancode = 0;
+	u32 len = 0;
 
 	while (1) {
 		scancode = read_scancode();

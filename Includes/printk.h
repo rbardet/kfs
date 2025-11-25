@@ -31,10 +31,10 @@ typedef enum {
 	COLOR_WHITE
 } color;
 
-extern uint16 tty_color;
-extern uint16 *vga;
-extern uint16 column;
-extern uint16 line;
+extern u16 tty_color;
+extern u16 *vga;
+extern u16 column;
+extern u16 line;
 
 void set_print_color(unsigned int color);
 int printk(const char *format, ...);

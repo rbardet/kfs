@@ -1,9 +1,9 @@
 #include "printk.h"
 
-uint16 tty_color = COLOR_WHITE << 8;
-uint16 *vga = (uint16 *)VRAM;
-uint16 column = 0;
-uint16 line = 0;
+u16 tty_color = COLOR_WHITE << 8;
+u16 *vga = (u16 *)VRAM;
+u16 column = 0;
+u16 line = 0;
 
 void set_print_color(unsigned int color) {
 	tty_color = color << 8;
@@ -12,21 +12,21 @@ void set_print_color(unsigned int color) {
 void reset() {
 	line = 0;
 	column = 0;
-	for (uint16 y = 0; y < HEIGHT; y++) {
-		for (uint16 x = 0; x < WIDTH; x++) {
+	for (u16 y = 0; y < HEIGHT; y++) {
+		for (u16 x = 0; x < WIDTH; x++) {
 			vga[y * WIDTH + x] = 0 | tty_color;
 		}
 	}
 }
 
 static void scroll() {
-	for (uint16 y = 0; y < HEIGHT; y++) {
-		for (uint16 x = 0; x < WIDTH; x++) {
+	for (u16 y = 0; y < HEIGHT; y++) {
+		for (u16 x = 0; x < WIDTH; x++) {
 			vga[(y - 1) * WIDTH + x] = vga[y * WIDTH + x];
 		}
 	}
 	
-	for (uint16 x = 0; x < HEIGHT; x++) {
+	for (u16 x = 0; x < HEIGHT; x++) {
 		vga[(HEIGHT - 1) * WIDTH + x] = ' ' | tty_color;
 	}
 }
@@ -53,7 +53,7 @@ void print_terminal(const char text) {
 			if (column == WIDTH) {
 				newLine();
 			}
-			uint16 tabLen = 4 - (column % 4);
+			u16 tabLen = 4 - (column % 4);
 			while (tabLen != 0) {
 				vga[line * WIDTH + (column++)] = ' ' | tty_color;
 				tabLen--;
@@ -78,7 +78,7 @@ static int putstrk(const char *str) {
 	return (len);
 }
 
-static void convert(uint64 nb, const char *base) {
+static void convert(u64 nb, const char *base) {
 	if (nb >= 16) {
 		convert(nb / 16, base);
 		convert(nb % 16, base);
@@ -88,7 +88,7 @@ static void convert(uint64 nb, const char *base) {
 	}
 }
 
-static int puthexk(uint32 nb, bool isUpper) {
+static int puthexk(u32 nb, bool isUpper) {
 	int				len;
 	unsigned int	tmp;
 	char			*base;
@@ -113,7 +113,7 @@ static int puthexk(uint32 nb, bool isUpper) {
 	return (len);
 }
 
-static int putptrk(uint64 ptr) {
+static int putptrk(u64 ptr) {
 	int len = 0;
 	len += putstrk("0x");
 	len += puthexk(ptr, false);
@@ -138,11 +138,11 @@ static int printk_format(va_list list, const char format) {
 			const char *str = va_arg(list, const char *);
 			return (putstrk(str));
 		case 'x':
-			return(puthexk(va_arg(list, uint64), false));
+			return(puthexk(va_arg(list, u64), false));
 		case 'X':
-			return(puthexk(va_arg(list, uint64), true));
+			return(puthexk(va_arg(list, u64), true));
 		case 'p':
-			return(putptrk(va_arg(list , uint64)));
+			return(putptrk(va_arg(list , u64)));
 	}
 	return (len);
 }

@@ -1,14 +1,14 @@
 #include "lib.h"
 
-static void print_hex_byte(uint8 b) {
-	const uint8 *hex = HEXA_BASE_UPPER;
+static void print_hex_byte(u8 b) {
+	const u8 *hex = HEXA_BASE_UPPER;
 	printk("%c%c ", hex[b >> 4], hex[b & 0xF]);
 }
 
-static void print_hex_addr(uint32 addr) {
-	const uint8 *hex = HEXA_BASE_UPPER;
-	uint8 buf[9];
-	uint32 i;
+static void print_hex_addr(u32 addr) {
+	const u8 *hex = HEXA_BASE_UPPER;
+	u8 buf[9];
+	u32 i;
 
 	for (i = 0; i < 8; i++) {
 		buf[7 - i] = hex[addr & 0xF];
@@ -18,11 +18,11 @@ static void print_hex_addr(uint32 addr) {
 	printk("%s: ", buf);
 }
 
-void khexdump(const void *data, uint32 size) {
-	const uint8 *byte = (const uint8 *)data;
-	uint8 ascii[17];
-	uint32 i, j;
-	uint32 base = (uint32)data;
+void khexdump(const void *data, u32 size) {
+	const u8 *byte = (const u8 *)data;
+	u8 ascii[17];
+	u32 i, j;
+	u32 base = (u32)data;
 
 	ascii[16] = '\0';
 
@@ -44,9 +44,9 @@ void khexdump(const void *data, uint32 size) {
 			printk(" ");
 	}
 
-	uint32 remaining = i % 16;
+	u32 remaining = i % 16;
 	if (remaining != 0) {
-		uint32 spaces = (16 - remaining) * 3 + (remaining <= 8 ? 1 : 0);
+		u32 spaces = (16 - remaining) * 3 + (remaining <= 8 ? 1 : 0);
 		for (j = 0; j < spaces; j++)
 			printk(" ");
 		ascii[remaining] = '\0';

@@ -11,16 +11,21 @@ start:
 	CALL kmain
 
 load_gdt:
-	MOV eax, [esp + 4]
-	LGDT [eax]
-	MOV ax, 0x10
-	MOV ds, ax
-	MOV es, ax
-	MOV fs, ax
-	MOV gs, ax
-	MOV ax, 0x18
-	MOV ss, ax
+	mov eax, [esp + 4]
+	lgdt [eax]
+	mov ax, 0x10
+	mov ds, ax
+	mov es, ax
+	mov fs, ax
+	mov gs, ax
+	mov ax, 0x18
+	mov ss, ax
 	JMP 0x08:.reload
-	RET
+	ret
 .reload:
-	RET
+	ret
+
+load_idt:
+	mov eax, [esp + 4]
+	lidt [eax]
+	ret

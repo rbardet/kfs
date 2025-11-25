@@ -3,21 +3,21 @@ global outb
 global outw
 global halt
 inb:
-	MOV edx, [esp + 4]
-	IN al, dx
-	RET
+	mov edx, [esp + 4]
+	in al, dx
+	ret
 
 outb:
-	MOV eax, [esp + 4]
-	MOV edx, [esp + 8]
-	OUT dx, al
-	RET
+	mov eax, [esp + 4]
+	mov edx, [esp + 8]
+	out dx, al
+	ret
 
 outw:
-	MOV eax, [esp + 4]
-	MOV edx, [esp + 8]
-	OUT dx, ax
-	RET
+	mov eax, [esp + 4]
+	mov edx, [esp + 8]
+	out dx, ax
+	ret
 
 halt:
 	hlt

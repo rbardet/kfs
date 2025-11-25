@@ -4,9 +4,11 @@
 #include "shell.h"
 #include "lib.h"
 #include "gdt.h"
+#include "idt.h"
 
 void kmain() {
 	init_gdt();
+	init_idt();
 	u8 buffer[BUFFER_SIZE];
 	terminal_initialize();
 	set_print_color(COLOR_LIGHT_BLUE);

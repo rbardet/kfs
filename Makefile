@@ -23,6 +23,7 @@ SH           = ${SRC}/shell
 
 C_SOURCES    = $(SRC)/kernel.c \
 			   ${SRC}/gdt.c \
+			   ${SRC}/idt.c \
 			   $(LIB)/khexdump.c \
 			   $(LIB)/strlen.c \
 			   $(LIB)/itoa.c \

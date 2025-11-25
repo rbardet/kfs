@@ -1,11 +1,12 @@
 section .text
-	ALIGN 4
-	DD 0x1BADB002
-	DD 0x00000000
-	DD -(0x1BADB002 + 0x00000000)
+	align 4
+	dd 0x1BADB002
+	dd 0x00000000
+	dd -(0x1BADB002 + 0x00000000)
 
 global start
 global load_gdt
+global load_idt
 extern kmain
 start:
 	CALL kmain

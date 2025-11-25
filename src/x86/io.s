@@ -2,6 +2,7 @@ global inb
 global outb
 global outw
 global halt
+
 inb:
 	mov edx, [esp + 4]
 	in al, dx

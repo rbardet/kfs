@@ -1,82 +1,49 @@
-NAME         = kfs.iso
-KERNEL       = kernel
-KERNEL_FILE  = kfs/
-BOOT_FILE    = kfs/boot/
-
-CC           = gcc
-CFLAGS       = -m32 -fno-builtin -fno-stack-protector -nostdlib -nodefaultlibs
-
-ASM          = nasm
-ASMFLAGS     = -f elf32
-
-LINKER       = linker/linker.ld
-LINK_FLAGS   = ld -m elf_i386 -T
-
-BIN          = bin/
-OBJ          = obj/
-SRC          = src
-X86          = $(SRC)/x86
-LIB          = $(SRC)/lib
-GRAPHIC      = $(SRC)/graphic
-KEYB         = ${SRC}/hardware/keyboard
-SH           = ${SRC}/shell
-
-C_SOURCES    = $(SRC)/kernel.c \
-			   ${SRC}/gdt.c \
-			   ${SRC}/idt.c \
-			   $(LIB)/khexdump.c \
-			   $(LIB)/strlen.c \
-			   $(LIB)/itoa.c \
-			   $(LIB)/memset.c \
-			   $(LIB)/strcmp.c \
-			   ${KEYB}/keyboard.c \
-			   $(GRAPHIC)/printk.c \
-			   ${GRAPHIC}/switch_screen.c \
-			   ${SH}/shell.c \
-			   ${SH}/command.c \
-			   ${SH}/cursor.c
-
-ASM_SOURCES  = $(X86)/boot.s \
-			   $(X86)/io.s \
-			   $(X86)/stack.s
-
-C_OBJECTS    = $(C_SOURCES:$(SRC)/%.c=$(OBJ)/%.o)
-ASM_OBJECTS  = $(ASM_SOURCES:$(SRC)/%.s=$(OBJ)/%.o)
-
-GRUB         = grub-mkrescue # --compress=gz
-QEMU         = qemu-system-i386
-
-INCLUDES = -I Includes
+include vars.mk
+include color.mk
 
 all: fclean $(BIN) $(NAME)
 
 $(BIN):
-	mkdir -p $@
+	@echo "$(BLUE)[MKDIR] Creating binary folder: $@$(RESET)"
+	@mkdir -p $@
 
 $(OBJ)/%.o: $(SRC)/%.c
-	mkdir -p $(dir $@)
-	$(CC) $(CFLAGS) -c ${INCLUDES} $< -o $@
+	@mkdir -p $(dir $@)
+	@echo "$(YELLOW)[CC] Compiling C file: $<$(RESET)"
+	@$(CC) $(CFLAGS) -c ${INCLUDES} $< -o $@
+	@echo "$(GREEN)[CC] OK -> $@$(RESET)"
 
 $(OBJ)/%.o: $(SRC)/%.s
-	mkdir -p $(dir $@)
-	$(ASM) $(ASMFLAGS) $< -o $@
+	@mkdir -p $(dir $@)
+	@echo "$(YELLOW)[AS] Assembling ASM file: $<$(RESET)"
+	@$(ASM) $(ASMFLAGS) $< -o $@
+	@echo "$(GREEN)[AS] OK -> $@$(RESET)"
 
 $(KERNEL): $(C_OBJECTS) $(ASM_OBJECTS)
-	$(LINK_FLAGS) $(LINKER) -o $@  $(ASM_OBJECTS) $(C_OBJECTS)
-	mv $@ $(BOOT_FILE)
+	@echo "$(BLUE)[LD] Linking kernel: $@$(RESET)"
+	@$(LINK_FLAGS) $(LINKER) -o $@  $(ASM_OBJECTS) $(C_OBJECTS)
+	@echo "$(GREEN)[LD] Kernel linked$(RESET)"
+	@mv $@ $(BOOT_FILE)
 
 $(NAME): $(KERNEL)
-	$(GRUB) -o $@ $(KERNEL_FILE)
-	mkdir -p ${BIN}
-	mv $@ $(BIN)
+	@echo "$(BLUE)[GRUB] Generating bootable image: $@$(RESET)"
+	@$(GRUB) -o $@ $(KERNEL_FILE)
+	@mkdir -p ${BIN}
+	@mv $@ $(BIN)
+	@echo "$(GREEN)[GRUB] Image created: $(BIN)/$@$(RESET)"
 
 run: $(NAME)
+	@echo "$(BLUE)[QEMU] Launching: $(BIN)/$(NAME)$(RESET)"
 	$(QEMU) $(BIN)/$(NAME)
 
 clean:
-	rm -rf $(OBJ)
+	@echo "$(RED)[RM] Cleaning objects...$(RESET)"
+	@rm -rf $(OBJ)
+	@echo "$(GREEN)[RM] Objects cleaned$(RESET)"
 
 fclean: clean
-	rm -f $(BOOT_FILE)/$(KERNEL) $(BIN)/$(NAME)
+	@echo "$(RED)[RM] Cleaning binaries...$(RESET)"
+	@rm -f $(BOOT_FILE)/$(KERNEL) $(BIN)/$(NAME)
+	@echo "$(GREEN)[RM] All cleaned$(RESET)"
 
 .PHONY: all run clean fclean

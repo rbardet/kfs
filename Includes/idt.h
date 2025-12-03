@@ -18,7 +18,7 @@ typedef struct {
 	u32 base;
 }  __attribute__((packed)) IDT_PTR;
 
-extern void load_idt();
+extern void load_idt(u32 idt_ptr);
 void init_idt();
 
 #endif

@@ -9,14 +9,14 @@ inb:
 	ret
 
 outb:
-	mov eax, [esp + 4]
-	mov edx, [esp + 8]
+	mov edx, [esp + 4]
+	mov eax, [esp + 8]
 	out dx, al
 	ret
 
 outw:
-	mov eax, [esp + 4]
-	mov edx, [esp + 8]
+	mov edx, [esp + 4]
+	mov eax, [esp + 8]
 	out dx, ax
 	ret
 

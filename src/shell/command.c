@@ -25,13 +25,13 @@ static void reboot() {
 	u8 good = 0x02;
 	while (good & 0x02) 
 		good = inb(KEYBOARD_STATUS_PORT);
-	outb(0xFE, KEYBOARD_STATUS_PORT);
+	outb(KEYBOARD_STATUS_PORT, 0xFE);
 	return;
 }
 
 static void shutdown() {
 	printk("Shutting down system...\n");
-	outw(SIG_SHUTDOWN, ACPI_PORT);
+	outw(ACPI_PORT, SIG_SHUTDOWN);
 	return;
 }
 
@@ -41,6 +41,8 @@ static void help() {
 	printk(" - help: Show this help message\n");
 	printk(" - color=<1-9>: Change text color\n");
 	printk(" - terminal=<0-9>: Switch to terminal number\n");
+	printk(" - reboot: reboot the kernel\n");
+	printk(" - shutdown: shutdown the kernel\n");
 	return;
 }
 

@@ -5,10 +5,10 @@
 void update_cursor() {
 	u16 pos = line * WIDTH + column;
 
-	outb(0x0F, 0x3D4);
-	outb((u8) (pos & 0xFF), 0x3D5);
-	outb(0x0E, 0x3D4);
-	outb((u8) ((pos >> 8) & 0xFF), 0x3D5);
+	outb(0x3D4, 0x0F);
+	outb(0x3D5, (u8) (pos & 0xFF));
+	outb(0x3D4, 0x0E);
+	outb(0x3D5, (u8) ((pos >> 8) & 0xFF));
 }
 
 void move_cursor(arrow dir) {
